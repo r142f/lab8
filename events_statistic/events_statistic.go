@@ -19,13 +19,14 @@ type EventsStatistic struct {
 }
 
 func (es *EventsStatistic) removeOldStatistics() {
-	for name, statistic := range es.Statistic {
+	now := es.Clock.Now()
+	for eventName, times := range es.Statistic {
 		curFrom := 0
-		for statistic[len(statistic)-1].Sub(statistic[curFrom]) >= time.Hour {
+		for curFrom < len(times) && now.Sub(times[curFrom]) >= time.Hour {
 			curFrom++
 		}
-		
-		es.Statistic[name] = es.Statistic[name][curFrom:]
+
+		es.Statistic[eventName] = es.Statistic[eventName][curFrom:]
 	}
 }
 

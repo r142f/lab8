@@ -49,7 +49,7 @@ func TestEventsStatisticWithSetableClock(t *testing.T) {
 	setableClock.SetNow(startTime.Add(time.Hour))
 
 	for name, count := range eventsStatistic.GetAllEventsStatistic() {
-		utils.AssertEqual(count, 10)
-		utils.AssertEqual(eventsStatistic.GetEventStatisticByName(name), 10)
+		utils.AssertEqual(count, 0)
+		utils.AssertEqual(eventsStatistic.GetEventStatisticByName(name), 0)
 	}
 }
